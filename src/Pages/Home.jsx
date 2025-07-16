@@ -1,20 +1,21 @@
-import React from 'react'
-import Header from '../Components/Header'
-import Search from '../Components/Search'
-
-import Footer from '../Components/Footer'
-import BlogList from '../Components/BlogList'
+import React, { useState } from "react";
+import Search from "../Components/Search";
+import BlogList from "../Components/BlogList";
 
 function Home() {
+  const [selectedTag, setSelectedTag] = useState("All");
+  const [search, setSearch] = useState("");
+
   return (
     <div>
-        <Header/>
-        <Search/>
-       
-       <BlogList/>
-       <Footer/>
+      <Search
+        selectedTag={selectedTag}
+        setSelectedTag={setSelectedTag}
+        search={search}
+        setSearch={setSearch}
+      />
+      <BlogList selectedTag={selectedTag} searchQuery={search} />
     </div>
-  )
+  );
 }
-
-export default Home
+export default Home;
