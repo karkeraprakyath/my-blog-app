@@ -16,6 +16,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body{
+  background-color: white;
+}
 
 a {
   font-weight: 500;
