@@ -14,8 +14,7 @@ function Search() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [tags] = useState(tagsData);
   const selectedTag = (name) => {
-    // You can handle tag selection here
-    // For now, just log the selected tag
+    
     console.log('Selected tag:', name);
   };
 
