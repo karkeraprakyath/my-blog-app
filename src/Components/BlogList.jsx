@@ -70,7 +70,7 @@ const BlogList = ({ selectedTag, searchQuery }) => {
                 />
               </div>
 
-              {/* Text Content */}
+              
               <div className='relative p-6 md:w-1/2 flex flex-col justify-center'>
                 {/* Tag */}
                 <div className='absolute top-4 right-4'>
