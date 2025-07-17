@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-900 text-gray-300 py-8'>
+    <footer className='bg-gray-800 text-gray-300 py-8'>
       <div className='max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center'>
         <p className='text-sm'>
           &copy; {new Date().getFullYear()} My Blog. All rights reserved.

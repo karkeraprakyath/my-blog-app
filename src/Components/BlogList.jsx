@@ -55,12 +55,13 @@ const BlogList = ({ selectedTag, searchQuery }) => {
         All Blog Posts
       </h1>
 
-      <div className='grid gap-10'>
+      <div className='grid gap-10 '>
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <div
-              key={post.id}
-              className='group flex flex-col md:flex-row bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden'>
+  key={post.id}
+  className="group flex flex-col md:flex-row bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+>
               {/* Image */}
               <div className='md:w-1/2 w-full h-64 md:h-auto'>
                 <img
@@ -74,7 +75,7 @@ const BlogList = ({ selectedTag, searchQuery }) => {
               <div className='relative p-6 md:w-1/2 flex flex-col justify-center'>
                 {/* Tag */}
                 <div className='absolute top-4 right-4'>
-                  <span className='bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm'>
+                  <span className='bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm'>
                     {post.tag}
                   </span>
                 </div>

@@ -43,7 +43,7 @@ function Search({ selectedTag, setSelectedTag, search, setSearch }) {
               setSelectedTag(item.name);
             }}
             className={`${
-              index === activeIndex ? "bg-red-500 text-black" : "text-blue-700"
+              index === activeIndex ? "bg-red-600 text-black" : "text-blue-700"
             } p-1 pb-2 rounded-sm md:rounded-full cursor-pointer md:px-4 hover:scale-110 hover:border border-red-500 transition-all duration-100 ease-in-out`}>
             {item.name}
           </li>
