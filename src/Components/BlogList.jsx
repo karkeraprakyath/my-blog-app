@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./../FireBase";
+import { Link } from "react-router-dom";
 
 const BlogList = ({ selectedTag, searchQuery }) => {
   const [posts, setPosts] = useState([]);
@@ -18,7 +19,7 @@ const BlogList = ({ selectedTag, searchQuery }) => {
           ...doc.data(),
         }));
 
-        
+        // Sort by createdAt timestamp (newest first)
         postList = postList.sort((a, b) => {
           if (b.createdAt && a.createdAt) {
             return b.createdAt.seconds - a.createdAt.seconds;
@@ -55,40 +56,41 @@ const BlogList = ({ selectedTag, searchQuery }) => {
         All Blog Posts
       </h1>
 
-      <div className='grid gap-10 '>
+      <div className='grid gap-10'>
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
-            <div
-  key={post.id}
-  className="group flex flex-col md:flex-row bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
->
-              {/* Image */}
-              <div className='md:w-1/2 w-full h-64 md:h-auto'>
-                <img
-                  src={post.coverImage}
-                  alt={post.title}
-                  className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
-                />
-              </div>
-
-              
-              <div className='relative p-6 md:w-1/2 flex flex-col justify-center'>
-                {/* Tag */}
-                <div className='absolute top-4 right-4'>
-                  <span className='bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm'>
-                    {post.tag}
-                  </span>
+            <Link to={`/blog/${post.id}`} key={post.id}>
+              <div className='group flex flex-col md:flex-row bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden'>
+                {/* Image */}
+                <div className='md:w-1/2 w-full h-64 md:h-auto'>
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
+                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
+                  />
                 </div>
 
-                <h2 className='text-2xl font-bold text-gray-800 dark:text-white mb-3 leading-snug group-hover:text-red-600 transition-colors'>
-                  {post.title}
-                </h2>
+                {/* Content */}
+                <div className='relative p-6 md:w-1/2 flex flex-col justify-center'>
+                  {/* Tag */}
+                  <div className='absolute top-4 right-4 bg-[#FFFFFF] shadow-lg'>
+                    <span className="bg-[#2563EB] text-white text-sm font-medium px-3 py-1  inline-block hover:bg-[#1D4ED8] transition">
+                      {post.tag}
+                    </span>
+                  </div>
 
-                <p className='text-gray-600 dark:text-gray-300 text-sm line-clamp-4'>
-                  {post.description}
-                </p>
+                  {/* Title */}
+                  <h2 className='text-2xl font-bold text-[#111827] dark:text-white mb-3 leading-snug group-hover:text-red-600 transition-colors'>
+                    {post.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className='text-[#6B7280] dark:text-gray-300 text-sm line-clamp-4'>
+                    {post.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <p className='text-center text-gray-500 text-lg'>No posts found.</p>

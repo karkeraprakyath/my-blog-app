@@ -19,17 +19,22 @@ function Search({ selectedTag, setSelectedTag, search, setSearch }) {
   return (
     <div className='flex justify-center mt-8 flex-col px-8 md:px-36'>
       
-      <img src={Banner} alt='Banner' className='rounded-2xl' />
+      <img
+  src={Banner}
+  alt='Banner'
+  className='w-full max-w-[800px] h-auto md:h-[199px] rounded-2xl self-center mx-auto'
+/>
+
 
       
-      <div className='bg-white shadow-lg p-3 rounded-lg -mt-5 mx-[23%] flex items-center'>
+      <div className='bg-[#E5E7EB] shadow-lg p-3 rounded-lg -mt-5 mx-[23%] flex items-center'>
         <IoSearchOutline className='text-[20px] text-gray-400' />
         <input
           type='text'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Search blog...'
-          className='outline-none ml-2 w-full bg-white text-gray-700 placeholder:text-gray-400'
+          className='outline-none ml-2 w-full bg-[#E5E7EB] text-[#111827] placeholder:text-gray-400'
         />
       </div>
 
@@ -42,9 +47,10 @@ function Search({ selectedTag, setSelectedTag, search, setSearch }) {
               setActiveIndex(index);
               setSelectedTag(item.name);
             }}
-            className={`${
-              index === activeIndex ? "bg-red-600 text-black" : "text-blue-700"
-            } p-1 pb-2 rounded-sm md:rounded-full cursor-pointer md:px-4 hover:scale-110 hover:border border-red-500 transition-all duration-100 ease-in-out`}>
+           className={`${
+  index === activeIndex ? "bg-[#2563EB] text-[#FFFFFF]" : "text-blue-700"
+} p-1 pb-2 rounded-sm md:rounded-full cursor-pointer md:px-4 border border-transparent hover:border-red-500`}
+>
             {item.name}
           </li>
         ))}

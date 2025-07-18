@@ -1,43 +1,65 @@
 /** @format */
-
 import React from "react";
-import ReactMarkdown from "react-markdown";
 
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+ import ReactMarkdown from "react-markdown";
+ import remarkGfm from "remark-gfm";
+ import rehypeHighlight from "rehype-highlight";
 
 const BlogPost = ({ post }) => {
+  const { title, coverImage, tag, description, createdAt, updatedAt } = post;
+
+  const formatDate = (date) => {
+    try {
+      return date.toDate().toLocaleDateString("en-IN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    } catch {
+      return "Unknown Date";
+    }
+  };
+
   return (
-    <div className='px-6 md:px-20 lg:px-56 mt-10'>
-      <h3 className='text-red-600 text-[12px]'>{post.tag}</h3>
-      <h3 className='text-[23px] font-bold'>{post.title}</h3>
-
-      <div className='flex items-center mt-5'>
-        <img
-          src='https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg'
-          className='w-[35px] rounded-full'
-          alt='Author'
-        />
-        <div className='ml-2'>
-          <h3 className='font-bold text-[12px]'>
-            {post.author || "Unknown Author"}
-          </h3>
-          <h3 className='text-gray-500 text-[10px]'>
-            {new Date(post.createdAt?.seconds * 1000).toDateString()}
-          </h3>
-        </div>
-      </div>
-
+    <div className='max-w-4xl mx-auto p-4 mt-10 shadow-md bg-gray-50'>
+      <h1 className='text-3xl font-bold text-gray-800 mt-6'>{title}</h1>
       <img
-        src={post.coverImage}
-        alt={post.title}
-        className='rounded-2xl mt-5 mb-5 w-full'
+        src={coverImage}
+        alt={title}
+        className='w-full h-[300px] object-cover rounded-lg shadow-md '
       />
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight]}>
-        {post.description}
-      </ReactMarkdown>
+    <div className="flex flex-wrap items-center text-sm text-gray-500 gap-4 mt-2">
+  {tag && <p className="text-blue-300 font-semibold text-sm tracking-wide uppercase">{tag}</p>
+}
+
+  {createdAt && (
+    <p className="text-xs text-gray-400">
+       Published: {formatDate(createdAt)}
+    </p>
+  )}
+
+  {updatedAt && (
+    <p className="text-xs text-gray-400">
+       Updated: {formatDate(updatedAt)}
+    </p>
+  )}
+</div>
+
+
+
+ <div className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none mt-4 text-black">
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+    rehypePlugins={[rehypeHighlight]}
+  >
+    {post.description}
+  </ReactMarkdown>
+</div>
+
+     
+{/* <div className="prose max-w-none">
+  <ReactMarkdown>{post.description}</ReactMarkdown>
+</div> */}
     </div>
   );
 };
