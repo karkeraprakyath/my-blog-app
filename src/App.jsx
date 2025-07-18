@@ -6,7 +6,7 @@ import PostPage from "./Components/PostPage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/my-blog-app">
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/post/:id' element={<PostPage />} />
