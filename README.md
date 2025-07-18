@@ -64,8 +64,9 @@ src/
 
 ## Screenshots
 
-![Home](screenshots/home.png)
-![Single Post](screenshots/single-post.png)
+![Desktop View](localhost_5173_my-blog-app_ (1).png)
+![Mobile View](localhost_5173_my-blog-app_.png)
+
 
 ## Live Demo
 
