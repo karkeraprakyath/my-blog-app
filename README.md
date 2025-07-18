@@ -70,7 +70,7 @@ src/
 
 ## Live Demo
 
-[https://my-react-blog.web.app]([https://my-react-blog.web.app](https://karkeraprakyath.github.io/my-blog-app/))
+(https://karkeraprakyath.github.io/my-blog-app/)
 
 ## License
 
