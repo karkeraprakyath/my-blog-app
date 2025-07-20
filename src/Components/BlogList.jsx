@@ -60,9 +60,9 @@ const BlogList = ({ selectedTag, searchQuery }) => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link to={`/blog/${post.id}`} key={post.id}>
-              <div className='group flex flex-col md:flex-row bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden'>
+              <div className='group flex flex-col md:flex-row bg-[#FFFFFF] border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden min-h-[300px]'>
                 {/* Image */}
-                <div className='md:w-1/2 w-full h-64 md:h-auto'>
+                <div className='md:w-1/2 w-full h-64 flex-shrink-0'>
                   <img
                     src={post.coverImage}
                     alt={post.title}
@@ -71,23 +71,23 @@ const BlogList = ({ selectedTag, searchQuery }) => {
                 </div>
 
                 {/* Content */}
-                <div className='relative p-6 md:w-1/2 flex flex-col justify-center'>
+                <div className='relative p-6 md:w-1/2 flex flex-col justify-center min-h-[300px]'>
                   {/* Tag */}
                   <div className='absolute top-4 right-4 bg-[#FFFFFF] shadow-lg'>
-                    <span className="bg-[#2563EB] text-white text-sm font-medium px-3 py-1  inline-block hover:bg-[#1D4ED8] transition">
+                    <span className="bg-[#2563EB] text-[#FFFFFF] text-sm font-medium px-3 py-1 inline-block hover:bg-[#3B82F6] transition">
                       {post.tag}
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h2 className='text-2xl font-bold text-[#111827] dark:text-white mb-3 leading-snug group-hover:text-red-600 transition-colors'>
-                    {post.title}
-                  </h2>
-
-                  {/* Description */}
-                  <p className='text-[#6B7280] dark:text-gray-300 text-sm line-clamp-4'>
-                    {post.description}
-                  </p>
+                  {/* Title & Description in a fixed-height flex column */}
+                  <div className='flex flex-col justify-between h-28'>
+                    <h2 className='text-lg font-bold text-[#111827] group-hover:text-[#3B82F6] transition-colors line-clamp-1 mb-1'>
+                      {post.title}
+                    </h2>
+                    <p className="text-[#6B7280] text-sm text-justify line-clamp-5">
+                      {post.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </Link>

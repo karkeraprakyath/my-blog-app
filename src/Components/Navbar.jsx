@@ -1,11 +1,11 @@
-/** @format */
+
 import React from 'react';
 import Logo from './../assets/logo.png'
 import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className='bg-indigo-600 shadow-md px-8 py-4 flex justify-between items-center'>
+    <nav className='bg-white shadow-md px-8 py-4 flex justify-between items-center'>
 
  <div className='flex items-center gap-2'>
     <Link to='/'>
@@ -15,10 +15,10 @@ function Navbar() {
 
     
       <ul className='flex gap-6 text-gray-700 font-medium'>
-        <li className='hover:text-red-500 cursor-pointer'>Home</li>
-        <li className='hover:text-red-500 cursor-pointer'>Blogs</li>
-        <li className='hover:text-red-500 cursor-pointer'>About</li>
-        <li className='hover:text-red-500 cursor-pointer'>Contact</li>
+        <li className='hover:text-blue-500 cursor-pointer'>Home</li>
+        <li className='hover:text-blue-500 cursor-pointer'>Blogs</li>
+        <li className='hover:text-blue-500 cursor-pointer'>About</li>
+        <li className='hover:text-blue-500 cursor-pointer'>Contact</li>
       </ul>
     </nav>
   );
