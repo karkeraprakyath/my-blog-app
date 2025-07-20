@@ -64,12 +64,13 @@ src/
 
 ## Screenshots
 
-![Home](screenshots/home.png)
-![Single Post](screenshots/single-post.png)
+![Desktop View](blog.png)
+![Mobile View](localhost_5173_my-blog-app_.png)
+
 
 ## Live Demo
 
-[https://my-react-blog.web.app](https://my-react-blog.web.app)
+(https://karkeraprakyath.github.io/my-blog-app/)
 
 ## License
 
@@ -77,4 +78,4 @@ MIT
 
 ## Author
 
-[Prakyath P Karkera](https://github.com/yourusername)
+[Prakyath P Karkera](https://github.com/karkeraprakyath)
