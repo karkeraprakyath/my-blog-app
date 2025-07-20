@@ -47,7 +47,7 @@ const BlogPost = ({ post }) => {
 
 
 
- <div className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none mt-4 text-black">
+ <div className="prose prose-sm sm:prose text-justify lg:prose-lg dark:prose-invert max-w-none mt-4 text-black">
   <ReactMarkdown
     remarkPlugins={[remarkGfm]}
     rehypePlugins={[rehypeHighlight]}

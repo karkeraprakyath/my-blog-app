@@ -84,7 +84,7 @@ const BlogList = ({ selectedTag, searchQuery }) => {
                     <h2 className='text-lg font-bold text-[#111827] group-hover:text-[#3B82F6] transition-colors line-clamp-1 mb-1'>
                       {post.title}
                     </h2>
-                    <p className='text-[#6B7280] text-sm line-clamp-2'>
+                    <p className="text-[#6B7280] text-sm text-justify line-clamp-5">
                       {post.description}
                     </p>
                   </div>
