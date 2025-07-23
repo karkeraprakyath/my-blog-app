@@ -20,8 +20,7 @@ const BlogPost = ({ post }) => {
   };
 
   return (
-    <div className='max-w-4xl mx-auto p-6 mt-10 shadow-md bg-background rounded-xl font-body'>
-      
+    <div className='max-w-4xl mx-auto p-6 mt-10 pb-20 shadow-md bg-background rounded-xl font-body'>
       <h1 className='text-3xl font-heading font-bold text-primary mt-4 mb-4'>
         {title}
       </h1>
@@ -32,11 +31,13 @@ const BlogPost = ({ post }) => {
         className='w-full h-auto object-cover rounded-lg shadow-md mb-4'
       />
 
-      <div className='flex flex-wrap items-center text-sm text-primary gap-4 mb-4'>
-        {tag && (
-          <p className='bg-accent text-primary font-medium px-3 py-1 rounded-full text-xs tracking-wide uppercase'>
-            {tag}
-          </p>
+      <div className='flex flex-wrap items-center text-sm text-primary gap-4 mb-4 '>
+        {Array.isArray(tag) && tag.length > 0 ? (
+          <span className='text-xs text-primary font-medium'>
+            Tags: {tag.join(", ")}
+          </span>
+        ) : (
+          <span className='text-xs text-gray-400'>No tags</span>
         )}
 
         {createdAt && (
@@ -52,11 +53,10 @@ const BlogPost = ({ post }) => {
         )}
       </div>
 
-      <div className='prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none text-justify text-primary'>
+      <div className='prose prose-lg dark:prose-invert max-w-none text-justify text-primary break-words min-h-[200px]'>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeHighlight]}
-        >
+          rehypePlugins={[rehypeHighlight]}>
           {post.description}
         </ReactMarkdown>
       </div>

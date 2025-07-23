@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./../FireBase";
 import { Link } from "react-router-dom";
-
-const BlogList = ({ selectedTag, searchQuery }) => {
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import ReactMarkdown from "react-markdown";
+const BlogList = ({ selectedTags = [], searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,19 +41,26 @@ const BlogList = ({ selectedTag, searchQuery }) => {
 
   if (loading) {
     return (
-      <h2 className='text-center text-2xl font-bold py-10 text-primary font-heading'>
-        Loading...
-      </h2>
+      <div className='flex flex-col items-center justify-center min-h-[60vh] text-center font-body'>
+        <span className='text-sm text-gray-400 mt-2 mb-6'>Loading...</span>
+        <span className='w-10 h-10 inline-block border-4 border-gray-300 border-l-yellow-600 border-t-yellow-600 rounded-full animate-spin'></span>
+      </div>
     );
   }
 
-  const filteredPosts = posts
-    .filter((post) => selectedTag === "All" || post.tag === selectedTag)
-    .filter(
-      (post) =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  const filteredPosts = posts.filter((post) => {
+    const postTags = Array.isArray(post.tag) ? post.tag : [];
+
+    const tagMatch =
+      selectedTags.length === 0 ||
+      selectedTags.some((tag) => postTags.includes(tag));
+
+    const searchMatch =
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return tagMatch && searchMatch;
+  });
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-12 font-body'>
@@ -63,46 +72,44 @@ const BlogList = ({ selectedTag, searchQuery }) => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link to={`/blog/${post.id}`} key={post.id}>
-              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden min-h-[300px]'>
-
-                {/* Image (30%) */}
-                <div className='md:basis-[30%] w-full h-64 md:h-auto flex-shrink-0 overflow-hidden'>
+              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-[300px]'>
+                <div className='md:w-1/2 h-full w-full flex-shrink-0 overflow-hidden'>
                   <img
                     src={post.coverImage}
                     alt={post.title}
-                    className='w-full h-full object-contain block'
+                    className='w-full h-full object-cover block'
                   />
                 </div>
 
-                {/* Content (70%) */}
-                <div className='relative p-6 md:basis-[70%] flex flex-col justify-center min-h-[300px]'>
-                  
-                  {/* Tag */}
-                  <div className='absolute top-4 right-4 bg-background shadow-md'>
-                    <span className='bg-accent text-primary text-sm font-medium px-3 py-1 inline-block rounded-full hover:bg-highlight hover:text-white transition-all'>
-                      {post.tag}
-                    </span>
+                <div className='relative p-6 flex flex-col justify-center h-full md:w-1/2'>
+                  <div className='absolute top-4 right-4 bg-background shadow-md px-3 py-1 rounded-full'>
+                    {Array.isArray(post.tag) && post.tag.length > 0 ? (
+                      <span className='text-xs text-primary font-medium'>
+                        Tags: {post.tag.join(", ")}
+                      </span>
+                    ) : (
+                      <span className='text-xs text-gray-400'>No tags</span>
+                    )}
                   </div>
 
-                  {/* Title & Description */}
                   <div className='flex flex-col justify-between h-auto'>
                     <h2 className='text-xl font-bold text-primary group-hover:text-highlight transition-colors line-clamp-1 mb-2 font-heading'>
                       {post.title}
                     </h2>
 
-                    <p className='text-lightText text-sm text-justify line-clamp-5'>
-                      {post.description}
-                    </p>
+                    <div className='text-lightText text-sm text-justify break-words line-clamp-5 overflow-hidden'>
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeHighlight]}>
+                        {post.description}
+                      </ReactMarkdown>
+                    </div>
 
-                    <Link
-                      to={`/blog/${post.id}`}
-                      className='text-highlight text-sm font-semibold mt-3 hover:underline inline-block'
-                    >
+                    <span className='text-highlight text-sm font-semibold mt-3 hover:underline inline-block'>
                       Read More →
-                    </Link>
+                    </span>
                   </div>
                 </div>
-
               </div>
             </Link>
           ))

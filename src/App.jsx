@@ -7,14 +7,13 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 function App() {
   return (
-    <BrowserRouter basename="/my-blog-app">
-      <Navbar/>
+    <BrowserRouter basename='/my-blog-app'>
+      <Navbar />
       <Routes>
-        
         <Route path='/' element={<Home />} />
-         <Route path="/blog/:id" element={<PostPage />} />
+        <Route path='/blog/:id' element={<PostPage />} />
       </Routes>
-        <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
