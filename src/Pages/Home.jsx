@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import Search from "../Components/Search";
 import BlogList from "../Components/BlogList";
@@ -7,17 +9,18 @@ function Home() {
   const [selectedTag, setSelectedTag] = useState("All");
   const [search, setSearch] = useState("");
 
+  const [selectedTags, setSelectedTags] = useState([]);
+
   return (
     <div>
-      
       <Search
-        selectedTag={selectedTag}
-        setSelectedTag={setSelectedTag}
         search={search}
         setSearch={setSearch}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
       />
-      <BlogList selectedTag={selectedTag} searchQuery={search} />
-     
+
+      <BlogList selectedTags={selectedTags} searchQuery={search} />
     </div>
   );
 }
