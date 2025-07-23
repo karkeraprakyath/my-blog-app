@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import Banner from "./../assets/banner.jpg";
+import Banner from "./../assets/logoforblogs.png";
 
 const tagsData = [
   { id: 1, name: "All" },
@@ -17,29 +17,29 @@ function Search({ selectedTag, setSelectedTag, search, setSearch }) {
   const [tags] = useState(tagsData);
 
   return (
-    <div className='flex justify-center mt-8 flex-col px-8 md:px-36'>
-      
+    <div className='flex justify-center mt-8 flex-col px-6 md:px-20 font-body'>
+
+      {/* Banner Image */}
       <img
-  src={Banner}
-  alt='Banner'
-  className='w-full max-w-[800px] h-auto md:h-[199px] rounded-2xl self-center mx-auto'
-/>
+        src={Banner}
+        alt='Banner'
+        className='w-full max-w-[800px] h-auto md:h-[199px] rounded-2xl self-center mx-auto shadow-md'
+      />
 
-
-      
-      <div className='bg-[#E5E7EB] shadow-lg p-3 rounded-lg -mt-5 mx-[23%] flex items-center'>
-        <IoSearchOutline className='text-[20px] text-gray-400' />
+      {/* Search Bar */}
+      <div className='bg-background shadow-md p-3 rounded-lg -mt-5 mx-auto w-full max-w-xl flex items-center'>
+        <IoSearchOutline className='text-xl text-primary' />
         <input
           type='text'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Search blog...'
-          className='outline-none ml-2 w-full bg-[#E5E7EB] text-[#111827] placeholder:text-gray-400'
+          className='outline-none ml-2 w-full bg-background text-primary placeholder:text-lightText text-sm'
         />
       </div>
 
-      
-      <ul className='flex gap-10 justify-center mt-5 flex-wrap'>
+      {/* Tags */}
+      <ul className='flex flex-wrap gap-4 justify-center mt-6'>
         {tags.map((item, index) => (
           <li
             key={item.id}
@@ -47,10 +47,13 @@ function Search({ selectedTag, setSelectedTag, search, setSearch }) {
               setActiveIndex(index);
               setSelectedTag(item.name);
             }}
-           className={`${
-  index === activeIndex ? "bg-[#2563EB] text-[#FFFFFF]" : "text-blue-700"
-} p-1 pb-2 rounded-sm md:rounded-full cursor-pointer md:px-4 border border-transparent hover:border-red-500`}
->
+            className={`cursor-pointer text-sm px-4 py-1.5 rounded-full border transition-all
+              ${
+                index === activeIndex
+                  ? "bg-accent text-highlight font-semibold shadow"
+                  : "text-primary hover:border-accent"
+              }`}
+          >
             {item.name}
           </li>
         ))}
