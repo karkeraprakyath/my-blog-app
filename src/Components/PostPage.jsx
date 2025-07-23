@@ -13,8 +13,7 @@ const PostPage = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      setLoading(true); 
-
+      setLoading(true);
       try {
         const docRef = doc(db, "posts", id);
         const docSnap = await getDoc(docRef);
@@ -29,15 +28,26 @@ const PostPage = () => {
         console.error("Error fetching post:", error);
         setPost(null);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchPost();
   }, [id]);
 
-  if (loading) return <p className='text-center py-10 text-lg'>Loading...</p>;
-  if (!post) return <p className='text-center py-10 text-lg'>Post not found</p>;
+  if (loading)
+    return (
+      <p className='text-center py-12 text-lg text-primary font-body'>
+        Loading...
+      </p>
+    );
+
+  if (!post)
+    return (
+      <p className='text-center py-12 text-lg text-lightText font-body'>
+        Post not found.
+      </p>
+    );
 
   return <BlogPost post={post} />;
 };

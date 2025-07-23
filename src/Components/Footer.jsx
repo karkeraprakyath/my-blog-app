@@ -4,19 +4,21 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className='bg-white text-black py-8'>
+    <footer className='bg-background text-primary py-8 font-body border-t border-gray-200'>
       <div className='max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center'>
-        <p className='text-black hover:text-blue text-sm '>
+        
+        <p className='text-sm text-primary hover:text-highlight transition-colors duration-200'>
           &copy; {new Date().getFullYear()} My Blog. All rights reserved.
         </p>
-        <div className='mt-4 md:mt-0'>
-          <a href='#' className='text-black hover:text-blue mx-2'>
+        
+        <div className='mt-4 md:mt-0 flex gap-4'>
+          <a href='#' className='text-sm text-primary hover:text-highlight transition-colors duration-200'>
             Privacy Policy
           </a>
-          <a href='#' className='text-black hover:text-blue mx-2'>
+          <a href='#' className='text-sm text-primary hover:text-highlight transition-colors duration-200'>
             Terms of Service
           </a>
-          <a href='#' className='text-black hover:text-blue mx-2'>
+          <a href='#' className='text-sm text-primary hover:text-highlight transition-colors duration-200'>
             Contact
           </a>
         </div>

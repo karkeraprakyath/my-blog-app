@@ -19,7 +19,6 @@ const BlogList = ({ selectedTag, searchQuery }) => {
           ...doc.data(),
         }));
 
-        // Sort by createdAt timestamp (newest first)
         postList = postList.sort((a, b) => {
           if (b.createdAt && a.createdAt) {
             return b.createdAt.seconds - a.createdAt.seconds;
@@ -39,7 +38,11 @@ const BlogList = ({ selectedTag, searchQuery }) => {
   }, []);
 
   if (loading) {
-    return <h2 className='text-center text-2xl font-bold py-10'>Loading...</h2>;
+    return (
+      <h2 className='text-center text-2xl font-bold py-10 text-primary font-heading'>
+        Loading...
+      </h2>
+    );
   }
 
   const filteredPosts = posts
@@ -51,8 +54,8 @@ const BlogList = ({ selectedTag, searchQuery }) => {
     );
 
   return (
-    <div className='max-w-6xl mx-auto px-4 py-12'>
-      <h1 className='text-4xl font-extrabold mb-10 text-center text-red-600'>
+    <div className='max-w-6xl mx-auto px-4 py-12 font-body'>
+      <h1 className='text-4xl font-extrabold mb-10 text-center text-primary font-heading'>
         All Blog Posts
       </h1>
 
@@ -60,40 +63,51 @@ const BlogList = ({ selectedTag, searchQuery }) => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link to={`/blog/${post.id}`} key={post.id}>
-              <div className='group flex flex-col md:flex-row bg-[#FFFFFF] border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden min-h-[300px]'>
-                {/* Image */}
-                <div className='md:w-1/2 w-full h-64 flex-shrink-0'>
+              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden min-h-[300px]'>
+
+                {/* Image (30%) */}
+                <div className='md:basis-[30%] w-full h-64 md:h-auto flex-shrink-0 overflow-hidden'>
                   <img
                     src={post.coverImage}
                     alt={post.title}
-                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
+                    className='w-full h-full object-contain block'
                   />
                 </div>
 
-                {/* Content */}
-                <div className='relative p-6 md:w-1/2 flex flex-col justify-center min-h-[300px]'>
+                {/* Content (70%) */}
+                <div className='relative p-6 md:basis-[70%] flex flex-col justify-center min-h-[300px]'>
+                  
                   {/* Tag */}
-                  <div className='absolute top-4 right-4 bg-[#FFFFFF] shadow-lg'>
-                    <span className="bg-[#2563EB] text-[#FFFFFF] text-sm font-medium px-3 py-1 inline-block hover:bg-[#3B82F6] transition">
+                  <div className='absolute top-4 right-4 bg-background shadow-md'>
+                    <span className='bg-accent text-primary text-sm font-medium px-3 py-1 inline-block rounded-full hover:bg-highlight hover:text-white transition-all'>
                       {post.tag}
                     </span>
                   </div>
 
-                  {/* Title & Description in a fixed-height flex column */}
-                  <div className='flex flex-col justify-between h-28'>
-                    <h2 className='text-lg font-bold text-[#111827] group-hover:text-[#3B82F6] transition-colors line-clamp-1 mb-1'>
+                  {/* Title & Description */}
+                  <div className='flex flex-col justify-between h-auto'>
+                    <h2 className='text-xl font-bold text-primary group-hover:text-highlight transition-colors line-clamp-1 mb-2 font-heading'>
                       {post.title}
                     </h2>
-                    <p className="text-[#6B7280] text-sm text-justify line-clamp-5">
+
+                    <p className='text-lightText text-sm text-justify line-clamp-5'>
                       {post.description}
                     </p>
+
+                    <Link
+                      to={`/blog/${post.id}`}
+                      className='text-highlight text-sm font-semibold mt-3 hover:underline inline-block'
+                    >
+                      Read More →
+                    </Link>
                   </div>
                 </div>
+
               </div>
             </Link>
           ))
         ) : (
-          <p className='text-center text-gray-500 text-lg'>No posts found.</p>
+          <p className='text-center text-lightText text-lg'>No posts found.</p>
         )}
       </div>
     </div>
