@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import ReactMarkdown from "react-markdown";
+
 const BlogList = ({ selectedTags = [], searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,37 +64,48 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
   });
 
   return (
-    <div className='max-w-6xl mx-auto px-4 py-12 font-body'>
-      <h1 className='text-4xl font-extrabold mb-10 text-center text-primary font-heading'>
+    <div className='max-w-6xl mx-auto px-4 py-10 font-body'>
+      <h1 className='text-3xl md:text-4xl font-extrabold mb-8 text-center text-primary font-heading'>
         All Blog Posts
       </h1>
 
-      <div className='grid gap-10'>
+      <div className='grid gap-8'>
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link to={`/blog/${post.id}`} key={post.id}>
-              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-[300px]'>
-                <div className='md:w-1/2 h-full w-full flex-shrink-0 overflow-hidden'>
+              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden'>
+                {/* Cover Image */}
+                <div className='md:w-1/2 w-full h-[200px] md:h-auto'>
                   <img
                     src={post.coverImage}
                     alt={post.title}
-                    className='w-full h-full object-cover block'
+                    className='w-full h-full object-cover'
                   />
                 </div>
 
-                <div className='relative p-6 flex flex-col justify-center h-full md:w-1/2'>
+                <div className='relative p-5 flex flex-col justify-between h-auto md:w-1/2'>
                   <div className='absolute top-4 right-4 bg-background shadow-md px-3 py-1 rounded-full'>
-                    {Array.isArray(post.tag) && post.tag.length > 0 ? (
-                      <span className='text-xs text-primary font-medium'>
-                        Tags: {post.tag.join(", ")}
-                      </span>
+                    {Array.isArray(post.tag) ? (
+                      <div className='flex gap-2'>
+                        {post.tag.map((tag, index) => (
+                          <span
+                            key={index}
+                            className='bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs'>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     ) : (
-                      <span className='text-xs text-gray-400'>No tags</span>
+                      post.tag && (
+                        <span className='bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs'>
+                          {post.tag}
+                        </span>
+                      )
                     )}
                   </div>
 
-                  <div className='flex flex-col justify-between h-auto'>
-                    <h2 className='text-xl font-bold text-primary group-hover:text-highlight transition-colors line-clamp-1 mb-2 font-heading'>
+                  <div className='flex flex-col justify-between h-full'>
+                    <h2 className='text-lg md:text-xl font-bold text-primary group-hover:text-highlight transition-colors mb-2 font-heading line-clamp-2'>
                       {post.title}
                     </h2>
 
