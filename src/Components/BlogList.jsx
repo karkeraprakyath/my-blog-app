@@ -62,7 +62,7 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-10 font-body'>
-      <h1 className='text-3xl md:text-4xl font-extrabold mb-8 text-center text-primary font-heading'>
+      <h1 className='text-3xl md:text-4xl font-extrabold mb-8 text-center text-lightText  hover:text-primary font-heading'>
         All Blog Posts
       </h1>
 
@@ -82,7 +82,7 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
                 
                 <div className='p-5 flex flex-col md:w-1/2 md:h-full justify-between'>
                   <div className='flex flex-col gap-3'>
-                    <h2 className='text-lg md:text-xl font-bold text-primary  transition-colors font-heading line-clamp-2'>
+                    <h2 className='text-lg md:text-xl font-bold text-lightText hover:text-primary  transition-colors font-heading line-clamp-2'>
                       {post.title}
                     </h2>
 
@@ -98,15 +98,13 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
                       </div>
                     )}
 
-                    <p
-                      className='text-lightText text-sm line-clamp-3 md:line-clamp-4 lg:line-clamp-5'
-                      title={post.description}>
+                    <p className='text-lightText text-sm line-clamp-3 md:line-clamp-4 lg:line-clamp-5'>
                       {post.description}
                     </p>
                   </div>
 
                   <div className='pt-3'>
-                    <span className='text-highlight text-sm font-semibold hover:underline'>
+                    <span className=' text-sm font-semibold '>
                       Read More →
                     </span>
                   </div>

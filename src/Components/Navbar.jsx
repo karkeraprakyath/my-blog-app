@@ -22,18 +22,18 @@ const Navbar = ({ search, setSearch }) => {
         <div className='  w-full flex justify-between items-center h-16'>
           <Link to='/' className='flex items-center space-x-2'>
             <img src={Logo} alt='Logo' className='w-8 h-8' />
-            <span className='text-xl font-heading font-bold text-primary'>
+            <span className='text-xl font-heading font-bold text-lightText hover:text-primary'>
               PixelPatch
             </span>
           </Link>
 
           <div className='hidden md:flex items-center gap-6'>
-            <ul className='flex gap-6 text-sm font-medium text-primary'>
+            <ul className='flex gap-6 text-sm font-medium text-lightText'>
               {navItems.map((item) => (
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className={`hover:text-highlight transition-colors ${
+                    className={`hover:text-primary transition-colors ${
                       location.pathname === item.path
                         ? "font-semibold text-highlight"
                         : ""

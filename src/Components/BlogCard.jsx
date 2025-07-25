@@ -7,12 +7,12 @@ const BlogCard = ({ post }) => {
         <img
           src={post.coverImage}
           alt={post.title}
-          className='w-full h-48 object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300'
+          className='w-full h-48 object-cover rounded-t-xl  transition-transform duration-300'
         />
       </Link>
 
       <div className='p-4 font-body'>
-        <h2 className='text-xl font-semibold text-primary group-hover:text-highlight transition-colors duration-200'>
+        <h2 className='text-xl font-semibold text-primary '>
           {post.title}
         </h2>
         <p className='text-sm text-lightText mt-1'>#{post.tag}</p>
