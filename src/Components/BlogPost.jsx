@@ -21,7 +21,7 @@ const BlogPost = ({ post }) => {
 
   return (
     <div className='max-w-4xl mx-auto p-6 mt-10 pb-20 shadow-md bg-background rounded-xl font-body'>
-      <h1 className='text-3xl font-heading font-bold text-primary mt-4 mb-4'>
+      <h1 className='text-3xl font-heading font-bold text-lightText mt-4 mb-4'>
         {title}
       </h1>
 
@@ -53,7 +53,7 @@ const BlogPost = ({ post }) => {
         )}
       </div>
 
-      <div className='prose prose-lg dark:prose-invert max-w-none text-justify text-primary break-words min-h-[200px]'>
+      <div className='prose prose-lg dark:prose-invert max-w-none text-justify text-lightText break-words min-h-[200px]'>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}>
