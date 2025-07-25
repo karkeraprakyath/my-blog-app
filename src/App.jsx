@@ -7,18 +7,18 @@ import Navbar from "./Components/Navbar";
 function App() {
   return (
     <BrowserRouter basename='/my-blog-app'>
-      <div className="min-h-screen w-full flex flex-col overflow-x-hidden">
+      
         <Navbar />
 
-        <main className="flex-grow">
+       
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/blog/:id' element={<PostPage />} />
           </Routes>
-        </main>
+       
 
         <Footer />
-      </div>
+    
     </BrowserRouter>
   );
 }
