@@ -2,7 +2,7 @@
 
 import React from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import Banner from "./../assets/logoforblogs.png";
+import Banner from "./../assets/logoforblogss.png";
 
 const tagsData = [
   "All",
