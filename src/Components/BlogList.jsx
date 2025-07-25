@@ -4,9 +4,6 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./../FireBase";
 import { Link } from "react-router-dom";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import ReactMarkdown from "react-markdown";
 
 const BlogList = ({ selectedTags = [], searchQuery }) => {
   const [posts, setPosts] = useState([]);
@@ -73,9 +70,8 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link to={`/blog/${post.id}`} key={post.id}>
-              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden'>
-                {/* Cover Image */}
-                <div className='md:w-1/2 w-full h-[200px] md:h-auto'>
+              <div className='group flex flex-col md:flex-row bg-background border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-auto md:h-80'>
+                <div className='w-full md:w-1/2 h-52 md:h-full'>
                   <img
                     src={post.coverImage}
                     alt={post.title}
@@ -83,41 +79,34 @@ const BlogList = ({ selectedTags = [], searchQuery }) => {
                   />
                 </div>
 
-                <div className='relative p-5 flex flex-col justify-between h-auto md:w-1/2'>
-                  <div className='absolute top-4 right-4 bg-background shadow-md px-3 py-1 rounded-full'>
-                    {Array.isArray(post.tag) ? (
-                      <div className='flex gap-2'>
-                        {post.tag.map((tag, index) => (
-                          <span
-                            key={index}
-                            className='bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs'>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    ) : (
-                      post.tag && (
-                        <span className='bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs'>
-                          {post.tag}
-                        </span>
-                      )
-                    )}
-                  </div>
-
-                  <div className='flex flex-col justify-between h-full'>
-                    <h2 className='text-lg md:text-xl font-bold text-primary group-hover:text-highlight transition-colors mb-2 font-heading line-clamp-2'>
+                
+                <div className='p-5 flex flex-col md:w-1/2 md:h-full justify-between'>
+                  <div className='flex flex-col gap-3'>
+                    <h2 className='text-lg md:text-xl font-bold text-primary  transition-colors font-heading line-clamp-2'>
                       {post.title}
                     </h2>
 
-                    <div className='text-lightText text-sm text-justify break-words line-clamp-5 overflow-hidden'>
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeHighlight]}>
-                        {post.description}
-                      </ReactMarkdown>
-                    </div>
+                    {Array.isArray(post.tag) && post.tag.length > 0 && (
+                      <div className='flex flex-wrap gap-2'>
+                        {post.tag.map((tag, index) => (
+                          <span
+                            key={index}
+                            className='bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-semibold'>
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
-                    <span className='text-highlight text-sm font-semibold mt-3 hover:underline inline-block'>
+                    <p
+                      className='text-lightText text-sm line-clamp-3 md:line-clamp-4 lg:line-clamp-5'
+                      title={post.description}>
+                      {post.description}
+                    </p>
+                  </div>
+
+                  <div className='pt-3'>
+                    <span className='text-highlight text-sm font-semibold hover:underline'>
                       Read More →
                     </span>
                   </div>
